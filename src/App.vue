@@ -5,7 +5,7 @@
       src="https://tailwindcss.com/_next/static/media/sarah-dayan.a8ff3f1095a58085a82e3bb6aab12eb2.jpg"
     />
     <div class="pt-6 text-center space-y-4 md:p-8 md:text-left">
-      <p class="text-lg font-medium text-zinc-100">
+      <p class="text-lg text-zinc font-medium text-zinc-100">
         “这是使用 tailwindcss
         来实现的一个基础的卡片区域，在实现该卡片区域的过程中，我们从来没有离开过
         HTML 区域.”
