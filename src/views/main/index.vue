@@ -1,5 +1,9 @@
 <template>
-  <div>这是首页内容</div>
+  <div>
+    <navigation-vue></navigation-vue>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import navigationVue from './components/navigation/index.vue'
+</script>
