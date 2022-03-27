@@ -3,6 +3,12 @@
     <ul
       class="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden"
     >
+      <!-- 汉堡按钮 -->
+      <li
+        class="z-20 fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white"
+      >
+        <m-svg-icon class="w-1.5 h-1.5" name="hamburger"></m-svg-icon>
+      </li>
       <!-- category item -->
       <li
         v-for="item in data"
