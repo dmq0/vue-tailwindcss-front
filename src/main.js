@@ -4,6 +4,7 @@ import router from './router'
 import mLibs from './libs'
 import { useREM } from './utils/flexible'
 import './styles/index.scss'
+import 'virtual:svg-icons-register'
 
 // 设置 rem
 useREM()
