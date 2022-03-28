@@ -20,6 +20,9 @@
 </template>
 
 <script>
+// 延迟关闭时长
+const DELAY_TIME = 100
+
 const PROP_TOP_LEFT = 'top-left'
 const PROP_TOP_RIGHT = 'top-right'
 const PROP_BOTTOM_LEFT = 'bottom-left'
@@ -57,17 +60,27 @@ const props = defineProps({
 // 控制 menu 展示
 const isVisable = ref(false)
 
+// 控制延迟关闭
+let timeout = null
 /**
  * 鼠标移入的触发行为
  */
 const onMouseenter = () => {
   isVisable.value = true
+  // 再次触发时，清理延时装置
+  if (timeout) {
+    clearTimeout(timeout)
+  }
 }
 /**
  * 鼠标移出的触发行为
  */
 const onMouseleave = () => {
-  isVisable.value = false
+  // 延时装置
+  timeout = setTimeout(() => {
+    isVisable.value = false
+    timeout = null
+  }, DELAY_TIME)
 }
 
 /**
