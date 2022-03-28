@@ -16,6 +16,10 @@ module.exports = {
       },
       boxShadow: {
         'l-white': '-10px 0 10px white'
+      },
+      colors: {
+        main: '#f44c58',
+        'hover-main': '#f32836'
       }
     }
   },
