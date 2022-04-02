@@ -1,6 +1,11 @@
 <template>
   <div>
-    <m-waterfall :data="pexelsList" :column="5" class="w-full px-1">
+    <m-waterfall
+      :data="pexelsList"
+      :column="5"
+      :picturePreReading="false"
+      class="w-full px-1"
+    >
       <template v-slot="{ item, width }">
         <itemVue :data="item" />
       </template>
