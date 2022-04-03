@@ -2,8 +2,8 @@
   <div>
     <m-waterfall
       :data="pexelsList"
-      :column="5"
-      :picturePreReading="false"
+      :column="isMobileTerminal ? 2 : 5"
+      :picturePreReading="true"
       class="w-full px-1"
     >
       <template v-slot="{ item, width }">
@@ -17,6 +17,7 @@
 import { ref } from 'vue'
 import { getPexelsList } from '@/api/pexels'
 import itemVue from './item.vue'
+import { isMobileTerminal } from '@/utils/flexible'
 
 /**
  * 构建数据请求
