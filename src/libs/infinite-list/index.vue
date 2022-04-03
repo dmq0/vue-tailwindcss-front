@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useIntersectionObserver, useVModel } from '@vueuse/core'
 
 const props = defineProps({
@@ -41,18 +41,38 @@ const loading = useVModel(props)
 
 // 滚动的元素
 const laodingTarget = ref(null)
+// 记录当前是否在底部（是否交叉）
+const targetIsIntersecting = ref(false)
 useIntersectionObserver(
   laodingTarget,
   ([{ isIntersecting }], observerElement) => {
-    // 当加载更多的视图可见时，加载更多数据
-    if (isIntersecting && !loading.value && !props.isFinished) {
-      // 修改加载数据标记
-      loading.value = true
-      // 触发加载更多行为
-      emits('onLoad')
-    }
+    // 获取当前交叉状态
+    targetIsIntersecting.value = isIntersecting
+    // 触发 load
+    emitLoad()
   }
 )
+
+/**
+ * 触发 load
+ */
+const emitLoad = () => {
+  // 当加载更多的视图可见时，加载更多数据
+  if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
+    // 修改加载数据标记
+    loading.value = true
+    // 触发加载更多行为
+    emits('onLoad')
+  }
+}
+
+/**
+ * 监听 loading 的变化，解决数据加载完成后，首屏未铺满的问题
+ */
+watch(loading, (val) => {
+  // 触发 load
+  emitLoad()
+})
 </script>
 
 <style lang="scss" scoped></style>
