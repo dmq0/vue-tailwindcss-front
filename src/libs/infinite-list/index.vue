@@ -57,13 +57,15 @@ useIntersectionObserver(
  * 触发 load
  */
 const emitLoad = () => {
-  // 当加载更多的视图可见时，加载更多数据
-  if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
-    // 修改加载数据标记
-    loading.value = true
-    // 触发加载更多行为
-    emits('onLoad')
-  }
+  // 当加载更多的视图可见时，加载更多数据，因为 DOM 存在渲染时长，所以可以在这里进行一次等待，进行简单的解决
+  setTimeout(() => {
+    if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
+      // 修改加载数据标记
+      loading.value = true
+      // 触发加载更多行为
+      emits('onLoad')
+    }
+  }, 100)
 }
 
 /**

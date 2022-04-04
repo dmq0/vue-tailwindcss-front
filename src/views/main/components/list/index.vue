@@ -34,7 +34,7 @@ const store = useStore()
  */
 let query = {
   page: 1,
-  size: 20,
+  size: 10,
   categoryId: '',
   searchText: ''
 }
@@ -82,8 +82,6 @@ const resetQuery = (newQuery) => {
   // 重置状态
   isFinished.value = false
   pexelsList.value = []
-  // 请求数据
-  getPexelsData()
 }
 
 /**
