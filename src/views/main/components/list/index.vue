@@ -34,7 +34,7 @@ const store = useStore()
  */
 let query = {
   page: 1,
-  size: 100,
+  size: 20,
   categoryId: '',
   searchText: ''
 }
@@ -95,8 +95,21 @@ watch(
     // 重置请求参数
     resetQuery({
       page: 1,
-      categoryId: currentCategory.id,
-      searchText: ''
+      categoryId: currentCategory.id
+    })
+  }
+)
+
+/**
+ * 监听搜索内容项的变化
+ */
+watch(
+  () => store.getters.searchText,
+  (val) => {
+    // 重置请求参数
+    resetQuery({
+      page: 1,
+      searchText: val
     })
   }
 )
