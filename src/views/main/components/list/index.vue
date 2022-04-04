@@ -21,17 +21,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getPexelsList } from '@/api/pexels'
 import itemVue from './item.vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 /**
  * 构建数据请求
  */
 let query = {
   page: 1,
-  size: 100
+  size: 100,
+  categoryId: '',
+  searchText: ''
 }
 // 数据是否在加载中
 const isLoading = ref(false)
@@ -68,4 +73,31 @@ const getPexelsData = async () => {
   // 修改 loading 标记
   isLoading.value = false
 }
+
+/**
+ * 通过此方法修改 query 请求参数，重新发起请求
+ */
+const resetQuery = (newQuery) => {
+  query = { ...query, ...newQuery }
+  // 重置状态
+  isFinished.value = false
+  pexelsList.value = []
+  // 请求数据
+  getPexelsData()
+}
+
+/**
+ * 监听 currentCategory 的变化
+ */
+watch(
+  () => store.getters.currentCategory,
+  (currentCategory) => {
+    // 重置请求参数
+    resetQuery({
+      page: 1,
+      categoryId: currentCategory.id,
+      searchText: ''
+    })
+  }
+)
 </script>
