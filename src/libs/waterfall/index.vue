@@ -258,12 +258,14 @@ watch(
  * 监听列数变化，重新构建瀑布流
  */
 const reset = () => {
-  // 重新计算列宽
-  useColumnWidth()
-  // 重置所有的定位数据，因为 data 中进行了深度监听，所以该操作会触发 data 的 watch
-  props.data.forEach((item) => {
-    item._style = null
-  })
+  setTimeout(() => {
+    // 重新计算列宽
+    useColumnWidth()
+    // 重置所有的定位数据，因为 data 中进行了深度监听，所以该操作会触发 data 的 watch
+    props.data.forEach((item) => {
+      item._style = null
+    })
+  }, 100)
 }
 watch(
   () => props.column,
