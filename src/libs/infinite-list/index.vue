@@ -57,23 +57,23 @@ useIntersectionObserver(
  * 触发 load
  */
 const emitLoad = () => {
-  // 当加载更多的视图可见时，加载更多数据，因为 DOM 存在渲染时长，所以可以在这里进行一次等待，进行简单的解决
-  setTimeout(() => {
-    if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
-      // 修改加载数据标记
-      loading.value = true
-      // 触发加载更多行为
-      emits('onLoad')
-    }
-  }, 100)
+  // 当加载更多的视图可见时，加载更多数据
+  if (targetIsIntersecting.value && !loading.value && !props.isFinished) {
+    // 修改加载数据标记
+    loading.value = true
+    // 触发加载更多行为
+    emits('onLoad')
+  }
 }
 
 /**
  * 监听 loading 的变化，解决数据加载完成后，首屏未铺满的问题
  */
 watch(loading, (val) => {
-  // 触发 load
-  emitLoad()
+  // 触发 load，延迟处理，等待 渲染和 useIntersectionObserver 的再次触发
+  setTimeout(() => {
+    emitLoad()
+  }, 100)
 })
 </script>
 
