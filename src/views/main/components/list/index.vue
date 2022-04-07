@@ -13,7 +13,7 @@
         class="w-full px-1"
       >
         <template v-slot="{ item, width }">
-          <itemVue :data="item" :width="width" />
+          <itemVue :data="item" :width="width" @click="onToPins" />
         </template>
       </m-waterfall>
     </m-infinite-list>
@@ -34,7 +34,7 @@ const store = useStore()
  */
 let query = {
   page: 1,
-  size: 10,
+  size: 20,
   categoryId: '',
   searchText: ''
 }
@@ -111,4 +111,11 @@ watch(
     })
   }
 )
+
+/**
+ * 进入 pins
+ */
+const onToPins = (item) => {
+  history.pushState(null, null, `/pins/${item.id}`)
+}
 </script>
