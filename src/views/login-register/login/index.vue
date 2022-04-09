@@ -63,6 +63,12 @@
         <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
       </div>
     </div>
+    <!-- 人类行为验证模块 -->
+    <slider-captcha-vue
+      v-if="isSliderCaptchaVisible"
+      @close="isSliderCaptchaVisible = false"
+      @success="onCaptchaSuccess"
+    ></slider-captcha-vue>
   </div>
 </template>
 
@@ -74,18 +80,32 @@ export default {
 
 <script setup>
 import headerVue from '../components/header.vue'
+import sliderCaptchaVue from './slider-captcha.vue'
 import {
   Form as VeeForm,
   Field as VeeField,
   ErrorMessage as VeeErrorMessage
 } from 'vee-validate'
 import { validateUsername, validatePassword } from '../validate'
+import { ref } from 'vue'
+
+// 控制 sliderCaptcha 展示
+const isSliderCaptchaVisible = ref(false)
 
 /**
  * 登录触发
  */
 const onLoginHandler = () => {
-  console.log('触发登录')
+  isSliderCaptchaVisible.value = true
+}
+
+/**
+ * 人类行为验证通过
+ */
+const onCaptchaSuccess = async () => {
+  isSliderCaptchaVisible.value = false
+  // 登录操作
+  console.log('执行登录操作')
 }
 </script>
 
