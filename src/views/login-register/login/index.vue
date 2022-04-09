@@ -22,6 +22,7 @@
           type="text"
           placeholder="用户名"
           autocomplete="on"
+          v-model="loginForm.username"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -35,6 +36,7 @@
           type="password"
           placeholder="密码"
           autocomplete="on"
+          v-model="loginForm.password"
         />
         <vee-error-message
           class="text-sm text-red-600 block mt-0.5 text-left"
@@ -51,7 +53,11 @@
           </a>
         </div>
 
-        <m-button class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800">
+        <m-button
+          class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
+          :loading="loading"
+          :isActiveAnim="false"
+        >
           登录
         </m-button>
       </vee-form>
@@ -88,6 +94,12 @@ import {
 } from 'vee-validate'
 import { validateUsername, validatePassword } from '../validate'
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { LOGIN_TYPE_USERNAME } from '@/constants'
+
+const store = useStore()
+const router = useRouter()
 
 // 控制 sliderCaptcha 展示
 const isSliderCaptchaVisible = ref(false)
@@ -105,7 +117,31 @@ const onLoginHandler = () => {
 const onCaptchaSuccess = async () => {
   isSliderCaptchaVisible.value = false
   // 登录操作
-  console.log('执行登录操作')
+  onLogin()
+}
+
+// 登录时的 loading
+const loading = ref(false)
+// 用户输入的用户名和密码
+const loginForm = ref({
+  username: '',
+  password: ''
+})
+/**
+ * 用户登录行为
+ */
+const onLogin = async () => {
+  loading.value = true
+  // 执行登录操作
+  try {
+    await store.dispatch('user/login', {
+      ...loginForm.value,
+      loginType: LOGIN_TYPE_USERNAME
+    })
+  } finally {
+    loading.value = false
+  }
+  router.push('/')
 }
 </script>
 
