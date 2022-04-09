@@ -3,30 +3,7 @@
     class="relative h-screen bg-white dark:bg-zinc-800 text-center xl:bg-zinc-200"
   >
     <!-- 头部图标：PC端 -->
-    <div class="hidden pt-5 h-8 xl:block">
-      <img
-        v-lazy
-        class="m-auto"
-        src="https://res.lgdsunday.club/signlogo.png"
-        alt=""
-      />
-    </div>
-    <!-- 头部图标：移动端 -->
-    <div class="h-[111px] xl:hidden">
-      <img
-        v-lazy
-        class="dark:hidden"
-        src="https://res.lgdsunday.club/login-bg.png"
-        alt=""
-      />
-      <img
-        v-lazy
-        class="h-5 absolute top-[5%] left-[50%] translate-x-[-50%]"
-        src="https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"
-        alt=""
-        srcset=""
-      />
-    </div>
+    <header-vue></header-vue>
     <!-- 表单区 -->
     <div
       class="block px-3 mt-4 dark:bg-zinc-800 xl:bg-white xl:w-[388px] xl:dark:bg-zinc-900 xl:m-auto xl:mt-8 xl:py-4 xl:rounded-sm xl:shadow-lg"
@@ -83,6 +60,8 @@ export default {
 }
 </script>
 
-<script setup></script>
+<script setup>
+import headerVue from '../components/header.vue'
+</script>
 
 <style lang="scss" scoped></style>
