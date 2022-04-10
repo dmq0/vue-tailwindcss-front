@@ -139,7 +139,10 @@
 
     <!-- PC 端 -->
     <m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
-      <change-avatar-vue :blob="currentBolb"></change-avatar-vue>
+      <change-avatar-vue
+        :blob="currentBolb"
+        @close="isDialogVisible = false"
+      ></change-avatar-vue>
     </m-dialog>
     <!-- 移动端 -->
     <m-popup v-else class="h-screen" v-model="isDialogVisible">

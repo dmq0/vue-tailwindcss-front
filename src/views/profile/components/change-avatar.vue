@@ -10,9 +10,13 @@
 
     <img class="" ref="imageTarget" :src="blob" />
 
-    <m-button class="mt-4 w-[80%] xl:w-1/2" @click="onConfirmClick"
-      >确定</m-button
+    <m-button
+      class="mt-4 w-[80%] xl:w-1/2"
+      :loading="loading"
+      @click="onConfirmClick"
     >
+      确定
+    </m-button>
   </div>
 </template>
 
@@ -48,6 +52,7 @@ import { ref, onMounted } from 'vue'
 import { getOSSClient } from '@/utils/sts'
 import { message } from '@/libs'
 import { useStore } from 'vuex'
+import { putProfile } from '@/api/sys'
 
 defineProps({
   blob: {
@@ -78,7 +83,9 @@ onMounted(() => {
 /**
  * 确定按钮点击事件
  */
+const loading = ref(false)
 const onConfirmClick = () => {
+  loading.value = true
   // 获取裁剪后的图片
   cropper.getCroppedCanvas().toBlob((blob) => {
     // 裁剪后的 blob 地址
@@ -104,11 +111,30 @@ const putObjectToOSS = async (file) => {
     }`
     // 文件存放路径，文件
     const res = await ossClient.put(`images/${fileName}`, file)
-    // TODO：图片上传成功
-    console.log(res)
+    // 通知服务器
+    onChangeProfile(res.url)
   } catch (e) {
     message('error', e)
   }
+}
+
+/**
+ * 上传新头像到服务器
+ */
+const onChangeProfile = async (avatar) => {
+  // 更新本地数据
+  store.commit('user/setUserInfo', {
+    ...store.getters.userInfo,
+    avatar
+  })
+  // 更新服务器数据
+  await putProfile(store.getters.userInfo)
+  // 通知用户
+  message('success', '用户头像修改成功')
+  // 关闭 loading
+  loading.value = false
+  // 关闭 dialog
+  close()
 }
 
 /**
