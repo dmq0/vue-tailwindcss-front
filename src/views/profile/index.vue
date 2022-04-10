@@ -23,6 +23,7 @@
           <!-- 头像部分 -->
           <div
             class="relative w-[80px] h-[80px] group xl:cursor-pointer xl:left-[50%] xl:translate-x-[-50%]"
+            @click="onAvatarClick"
           >
             <img
               v-lazy
@@ -135,6 +136,8 @@
         </m-button>
       </div>
     </div>
+
+    <m-dialog title="标题" v-model="isDialogVisible"> 测试用 </m-dialog>
   </div>
 </template>
 
@@ -157,11 +160,14 @@ const router = useRouter()
 
 // 隐藏域
 const inputFileTarget = ref(null)
+// 头像 dialog 展示
+const isDialogVisible = ref(false)
 /**
  * 更换头像点击事件
  */
 const onAvatarClick = () => {
-  inputFileTarget.value.click()
+  // inputFileTarget.value.click()
+  isDialogVisible.value = true
 }
 
 /**
