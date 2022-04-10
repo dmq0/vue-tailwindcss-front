@@ -137,7 +137,20 @@
       </div>
     </div>
 
-    <m-dialog title="标题" v-model="isDialogVisible"> 测试用 </m-dialog>
+    <!-- PC 端 -->
+    <m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
+      <change-avatar-vue
+        :blob="currentBolb"
+        @close="isDialogVisible = false"
+      ></change-avatar-vue>
+    </m-dialog>
+    <!-- 移动端 -->
+    <m-popup v-else class="h-screen" v-model="isDialogVisible">
+      <change-avatar-vue
+        :blob="currentBolb"
+        @close="isDialogVisible = false"
+      ></change-avatar-vue>
+    </m-popup>
   </div>
 </template>
 
@@ -154,6 +167,7 @@ import { message, confirm } from '@/libs'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import changeAvatarVue from './components/change-avatar.vue'
 
 const store = useStore()
 const router = useRouter()
@@ -162,18 +176,28 @@ const router = useRouter()
 const inputFileTarget = ref(null)
 // 头像 dialog 展示
 const isDialogVisible = ref(false)
+// 选中的图片
+const currentBolb = ref('')
 /**
  * 更换头像点击事件
  */
 const onAvatarClick = () => {
-  // inputFileTarget.value.click()
-  isDialogVisible.value = true
+  inputFileTarget.value.click()
 }
 
 /**
  * 头像选择之后的回调
  */
-const onSelectImgHandler = () => {}
+const onSelectImgHandler = () => {
+  // 获取选中的文件
+  const imgFile = inputFileTarget.value.files[0]
+  // 生成 blob 对象
+  const blob = URL.createObjectURL(imgFile)
+  // 获取选中的图片
+  currentBolb.value = blob
+  // 展示 Dialog
+  isDialogVisible.value = true
+}
 
 /**
  * 数据本地的双向同步

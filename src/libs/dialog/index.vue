@@ -26,7 +26,7 @@
           <slot />
         </div>
         <!-- 按钮 -->
-        <div class="flex justify-end">
+        <div class="flex justify-end" v-if="cancelHandler || confirmHandler">
           <m-button type="info" class="mr-2" @click="onCancelClick">{{
             cancelText
           }}</m-button>
