@@ -139,10 +139,7 @@
 
     <!-- PC 端 -->
     <m-dialog v-if="!isMobileTerminal" v-model="isDialogVisible">
-      <change-avatar-vue
-        :blob="currentBolb"
-        @close="isDialogVisible = false"
-      ></change-avatar-vue>
+      <change-avatar-vue :blob="currentBolb"></change-avatar-vue>
     </m-dialog>
     <!-- 移动端 -->
     <m-popup v-else class="h-screen" v-model="isDialogVisible">
@@ -166,7 +163,7 @@ import { putProfile } from '@/api/sys'
 import { message, confirm } from '@/libs'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import changeAvatarVue from './components/change-avatar.vue'
 
 const store = useStore()
@@ -198,6 +195,16 @@ const onSelectImgHandler = () => {
   // 展示 Dialog
   isDialogVisible.value = true
 }
+
+/**
+ * 监听 dialog 关闭
+ */
+watch(isDialogVisible, (val) => {
+  if (!val) {
+    // 防止 change 不重复触发
+    inputFileTarget.value.value = null
+  }
+})
 
 /**
  * 数据本地的双向同步
