@@ -62,7 +62,7 @@ const text = useVModel(props)
 
 // 输入的字符数
 const currentNumber = computed(() => {
-  return text.value.length
+  return text.value?.length
 })
 </script>
 
