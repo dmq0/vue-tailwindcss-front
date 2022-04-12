@@ -145,7 +145,11 @@
       ></change-avatar-vue>
     </m-dialog>
     <!-- 移动端 -->
-    <m-popup v-else class="h-screen" v-model="isDialogVisible">
+    <m-popup
+      v-else
+      :class="{ 'h-screen': isDialogVisible }"
+      v-model="isDialogVisible"
+    >
       <change-avatar-vue
         :blob="currentBolb"
         @close="isDialogVisible = false"
