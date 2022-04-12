@@ -124,6 +124,8 @@ defineRule('validateConfirmPassword', validateConfirmPassword)
  * 进入登录页面
  */
 const onToLogin = () => {
+  // 配置跳转方式
+  store.commit('app/changeRouterType', 'push')
   router.push('/login')
 }
 

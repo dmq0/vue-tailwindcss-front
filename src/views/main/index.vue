@@ -55,6 +55,8 @@ const onVipClick = () => {}
  * 我的按钮点击事件
  */
 const onMyClick = () => {
+  // 配置跳转方式
+  store.commit('app/changeRouterType', 'push')
   if (store.getters.token) {
     router.push('/profile')
   } else {

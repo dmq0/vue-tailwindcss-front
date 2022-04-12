@@ -148,6 +148,8 @@ const onLogin = async () => {
  * 进入注册页面
  */
 const onToRegister = () => {
+  // 配置跳转方式
+  store.commit('app/changeRouterType', 'push')
   router.push('/register')
 }
 </script>
