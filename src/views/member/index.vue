@@ -31,9 +31,9 @@
         </div>
         <p class="mt-1 text-sm text-zinc-500">{{ currentPayData.desc }}</p>
         <!-- 支付 -->
+        <payment-vue class="mt-4" />
       </div>
     </div>
-    <m-count-down :time="1000 * 60"></m-count-down>
   </div>
 </template>
 
@@ -50,6 +50,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { getVipPayList } from '@/api/pay'
+import paymentVue from './components/payment/index.vue'
 
 /**
  * 列表数据
