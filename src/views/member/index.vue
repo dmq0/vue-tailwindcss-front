@@ -33,6 +33,7 @@
         <!-- 支付 -->
       </div>
     </div>
+    <m-count-down :time="1000 * 60"></m-count-down>
   </div>
 </template>
 
