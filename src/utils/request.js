@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import { message as $message } from '@/libs'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -28,6 +29,7 @@ service.interceptors.response.use(
     if (success) {
       return data
     } else {
+      $message('warn', message)
       // TODO：业务错误
       return Promise.reject(new Error(message))
     }
