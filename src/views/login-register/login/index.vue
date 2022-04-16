@@ -66,7 +66,7 @@
         <!-- QQ -->
         <qq-login-vue></qq-login-vue>
         <!-- 微信 -->
-        <m-svg-icon class="w-4 cursor-pointer" name="wexin"></m-svg-icon>
+        <wx-login-vue></wx-login-vue>
       </div>
     </div>
     <!-- 人类行为验证模块 -->
@@ -98,6 +98,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { LOGIN_TYPE_USERNAME } from '@/constants'
 import qqLoginVue from './qq-login.vue'
+import wxLoginVue from './weixin-login.vue'
 
 const store = useStore()
 const router = useRouter()
