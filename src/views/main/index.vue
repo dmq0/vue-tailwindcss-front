@@ -59,7 +59,11 @@ const router = useRouter()
 /**
  * VIP 按钮点击事件
  */
-const onVipClick = () => {}
+const onVipClick = () => {
+  // 配置跳转方式
+  store.commit('app/changeRouterType', 'push')
+  router.push('/member')
+}
 /**
  * 我的按钮点击事件
  */
