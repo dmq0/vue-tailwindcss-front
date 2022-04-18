@@ -6,9 +6,9 @@
       class="flex flex-col items-center justify-evenly border-zinc-200 dark:border-zinc-600 border-[1px] py-3 rounded-md mt-1"
     >
       <p class="text-[32px] text-orange-600 font-sans">
-        <span class="text-base text-zinc-900 dark:text-zinc-200"
-          >支付金额：</span
-        >
+        <span class="text-base text-zinc-900 dark:text-zinc-200">
+          支付金额：
+        </span>
         <span class="text-lg mr-[-12px]">￥</span>
         19
       </p>
@@ -29,6 +29,18 @@
 
 <script setup>
 import discountsVue from '../discounts.vue'
+import { alipay } from '@/utils/pay'
+
+const props = defineProps({
+  payData: {
+    required: true,
+    type: Object
+  }
+})
+
+const onAliPayClick = () => {
+  alipay(props.payData.title, props.payData.desc)
+}
 </script>
 
 <style lang="scss" scoped></style>

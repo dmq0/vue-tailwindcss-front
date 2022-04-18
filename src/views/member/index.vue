@@ -31,7 +31,7 @@
         </div>
         <p class="mt-1 text-sm text-zinc-500">{{ currentPayData.desc }}</p>
         <!-- 支付 -->
-        <payment-vue class="mt-4" />
+        <payment-vue class="mt-4" :payData="currentPayData" />
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@ import { isMobileTerminal } from '@/utils/flexible'
 import payMenuItemVue from './components/pay-menu-item.vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { getVipPayList } from '@/api/pay'
 import paymentVue from './components/payment/index.vue'
 
@@ -79,6 +79,11 @@ const currentPayData = ref({})
 const onChangeCurrentPay = (item) => {
   currentPayData.value = item
 }
+
+// 保存支付数据
+watch(currentPayData, () => {
+  store.commit('pay/setPayData', currentPayData.value)
+})
 </script>
 
 <style lang="scss" scoped></style>
