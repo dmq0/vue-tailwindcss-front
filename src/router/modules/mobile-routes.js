@@ -42,5 +42,16 @@ export default [
     meta: {
       user: true
     }
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/error/404/index.vue')
+  },
+  // 404 页面处理
+  {
+    path: '/:catchAll(.*)',
+    name: 'error',
+    redirect: '/404'
   }
 ]
