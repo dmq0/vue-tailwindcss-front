@@ -44,6 +44,7 @@ service.interceptors.response.use(
       // TODO: token超时
       store.dispatch('user/logout')
     }
+    $message('error', error.response.data.message)
     // TODO: 提示错误消息
     return Promise.reject(error)
   }
