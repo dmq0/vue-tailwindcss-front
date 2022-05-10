@@ -32,7 +32,7 @@
         textClass="text-zinc-400 dark:text-zinc-500"
         @click="onMyClick"
       >
-        {{ $store.getters.token ? '我的' : '去登录' }}
+        {{ $store.getters.token ? '我的' : '登录' }}
       </m-trigger-menu-item>
     </m-trigger-menu>
   </div>
