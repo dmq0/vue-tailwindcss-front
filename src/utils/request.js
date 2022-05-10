@@ -10,6 +10,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
+    config.headers.icode = '你需要在这里填入你的 icode'
     if (store.getters.token) {
       // 如果token存在 注入token
       config.headers.Authorization = `Bearer ${store.getters.token}`
