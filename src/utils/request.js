@@ -13,7 +13,7 @@ service.interceptors.request.use(
   (config) => {
     const { icode, time } = getTestICode()
     config.headers.icode = icode
-    config.headers.codeType = time
+    config.headers.codetype = time
     if (store.getters.token) {
       // 如果token存在 注入token
       config.headers.Authorization = `Bearer ${store.getters.token}`
