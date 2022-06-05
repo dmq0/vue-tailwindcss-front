@@ -209,9 +209,9 @@ watch(isDialogVisible, (val) => {
 })
 
 /**
- * 数据本地的双向同步
+ * 数据本地的双向同步，增加一个单层深拷贝
  */
-const userInfo = ref(store.getters.userInfo)
+const userInfo = ref({ ...store.getters.userInfo })
 // const changeStoreUserInfo = (key, value) => {
 //   store.commit('user/setUserInfo', {
 //     ...store.getters.userInfo,
