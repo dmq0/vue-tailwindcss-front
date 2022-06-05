@@ -52,7 +52,6 @@
             去注册
           </a>
         </div>
-
         <m-button
           class="w-full dark:bg-zinc-900 xl:dark:bg-zinc-800"
           :loading="loading"
