@@ -102,7 +102,7 @@ const useContainerWidth = () => {
   containerLeft.value = parseFloat(paddingLeft)
   // 容器宽度
   containerWidth.value =
-    containerTarget.value.offsetWidth -
+    containerTarget.value.clientWidth -
     parseFloat(paddingLeft) -
     parseFloat(paddingRight)
 }
