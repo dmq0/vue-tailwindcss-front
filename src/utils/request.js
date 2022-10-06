@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
 import { message as $message } from '@/libs'
-import md5 from 'md5'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -11,9 +10,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    const { icode, time } = getTestICode()
-    config.headers.icode = icode
-    config.headers.codetype = time
+    config.headers.icode = 'icode'
     if (store.getters.token) {
       // 如果token存在 注入token
       config.headers.Authorization = `Bearer ${store.getters.token}`
@@ -53,17 +50,5 @@ service.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-/**
- * 返回 Icode 的实现
- */
-function getTestICode() {
-  const now = parseInt(Date.now() / 1000)
-  const code = now + 'LGD_Sunday-1991'
-  return {
-    icode: md5(code),
-    time: now
-  }
-}
 
 export default service
