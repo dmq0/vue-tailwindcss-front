@@ -7,7 +7,7 @@
     <!-- 气泡展示动画 -->
     <transition name="slide">
       <div
-        v-show="isVisable"
+        v-show="isVisable && $slots.default && $slots.default().length > 0"
         ref="contentTarget"
         class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border rounded-md dark:border-zinc-700"
         :style="contentStyle"

@@ -33,24 +33,25 @@
         ></m-button>
       </div>
     </template>
-
-    <div v-if="$store.getters.token" class="w-[140px] overflow-hidden">
-      <div
-        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
-        v-for="item in menuArr"
-        :key="item.id"
-        @click="onItemClick(item.path)"
-      >
-        <m-svg-icon
-          :name="item.icon"
-          class="w-1.5 h-1.5 mr-1"
-          fillClass="fill-zinc-900 dark:fill-zinc-300"
-        ></m-svg-icon>
-        <span class="text-zinc-800 dark:text-zinc-300 text-sm">{{
-          item.title
-        }}</span>
+    <template #default v-if="$store.getters.token">
+      <div class="w-[140px] overflow-hidden">
+        <div
+          class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800"
+          v-for="item in menuArr"
+          :key="item.id"
+          @click="onItemClick(item.path)"
+        >
+          <m-svg-icon
+            :name="item.icon"
+            class="w-1.5 h-1.5 mr-1"
+            fillClass="fill-zinc-900 dark:fill-zinc-300"
+          ></m-svg-icon>
+          <span class="text-zinc-800 dark:text-zinc-300 text-sm">{{
+            item.title
+          }}</span>
+        </div>
       </div>
-    </div>
+    </template>
   </m-popover>
 </template>
 
